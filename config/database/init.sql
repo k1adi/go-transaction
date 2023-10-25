@@ -9,7 +9,7 @@ CREATE TABLE mst_customer (
 
 CREATE TABLE mst_merchant (
     id VARCHAR(100) PRIMARY KEY,
-    merchant_name VARCHAR(100) UNIQUE NOT NULL,
+    name VARCHAR(100) UNIQUE NOT NULL,
     address TEXT NOT NULL
 );
 
