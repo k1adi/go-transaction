@@ -17,7 +17,7 @@ type appServer struct {
 }
 
 func (a *appServer) initController() {
-	controller.NewTestController(a.engine)
+	controller.NewBankController(a.engine, a.usecaseManager.BankUsecase())
 }
 
 func (a *appServer) Run() {
