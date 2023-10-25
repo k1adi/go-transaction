@@ -28,10 +28,18 @@ func (b *bankRepository) List() ([]model.Bank, error) {
 		return nil, err
 	}
 
+	banks, err := b.Scan(rows)
+	if err != nil {
+		return nil, err
+	}
+	return banks, nil
+}
+
+func (b *bankRepository) Scan(rows *sql.Rows) ([]model.Bank, error) {
 	var banks []model.Bank
 	for rows.Next() {
 		var bank model.Bank
-		if err = rows.Scan(&bank.Id, &bank.Name); err != nil {
+		if err := rows.Scan(&bank.Id, &bank.Name); err != nil {
 			return nil, err
 		}
 
