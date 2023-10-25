@@ -4,7 +4,6 @@ import (
 	"go-transaction/config"
 	"go-transaction/delivery/controller"
 	"go-transaction/manager"
-	"log"
 
 	"fmt"
 
@@ -32,16 +31,9 @@ func (a *appServer) Run() {
 
 func Server() *appServer {
 	engine := gin.Default()
-	cfg, err := config.NewConfig()
-	if err != nil {
-		log.Fatalln("Error Config : ()", err.Error())
-	}
+	cfg := config.NewConfig()
 
-	infraManager, err := manager.NewInfraManager(cfg)
-	if err != nil {
-		log.Fatalln("Error Conection : ", err.Error())
-	}
-
+	infraManager := manager.NewInfraManager(cfg)
 	repoManager := manager.NewRepoManager(infraManager)
 	useCaseManager := manager.NewUseCaseManager(repoManager)
 

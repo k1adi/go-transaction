@@ -1,6 +1,7 @@
 package config
 
 import (
+	"log"
 	"os"
 
 	"github.com/joho/godotenv"
@@ -24,12 +25,7 @@ type FileConfig struct {
 	FilePath string
 }
 
-func (c *Config) ReadConfig() error {
-	err := godotenv.Load()
-	if err != nil {
-		return err
-	}
-
+func (c Config) ReadConfig() Config {
 	c.DBConfig = DBConfig{
 		Host:     os.Getenv("DB_HOST"),
 		Port:     os.Getenv("DB_PORT"),
@@ -48,15 +44,15 @@ func (c *Config) ReadConfig() error {
 		FilePath: os.Getenv("FILE_PATH"),
 	}
 
-	return nil
+	return c
 }
 
-func NewConfig() (*Config, error) {
-	config := &Config{}
-	err := config.ReadConfig()
+func NewConfig() Config {
+	err := godotenv.Load()
 	if err != nil {
-		return nil, err
+		log.Println("Error loading .env file")
 	}
 
-	return config, nil
+	config := &Config{}
+	return config.ReadConfig()
 }
