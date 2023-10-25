@@ -33,6 +33,7 @@ CREATE TABLE tx_transaction (
     user_id VARCHAR(100) NOT NULL,
     merchant_id VARCHAR(100) NOT NULL,
     amount BIGINT NOT NULL,
+    transaction_at DATE NOT NULL,
 
     CONSTRAINT fk_bank_id FOREIGN KEY(bank_id) REFERENCES mst_bank(id),
     CONSTRAINT fk_user_id FOREIGN KEY(user_id) REFERENCES user_credential(id),
