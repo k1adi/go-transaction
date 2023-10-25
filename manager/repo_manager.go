@@ -4,6 +4,7 @@ import "go-transaction/repository"
 
 type RepoManager interface {
 	BankRepository() repository.BankRepository
+	MerchantRepository() repository.MerchantRepository
 }
 
 type repoManager struct {
@@ -12,6 +13,10 @@ type repoManager struct {
 
 func (r *repoManager) BankRepository() repository.BankRepository {
 	return repository.NewBankRepository(r.infra.Connection())
+}
+
+func (r *repoManager) MerchantRepository() repository.MerchantRepository {
+	return repository.NewMerchantRepository(r.infra.Connection())
 }
 
 func NewRepoManager(infraParam InfraManager) RepoManager {
