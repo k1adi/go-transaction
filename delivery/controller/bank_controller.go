@@ -1,6 +1,7 @@
 package controller
 
 import (
+	"go-transaction/delivery/middleware"
 	"go-transaction/model"
 	"go-transaction/usecase"
 	"go-transaction/utils/common"
@@ -109,7 +110,7 @@ func (b *BankController) updateHandler(ctx *gin.Context) {
 func NewBankController(router *gin.Engine, usecase usecase.BankUsecase) *BankController {
 	controller := &BankController{router, usecase}
 
-	routerGroup := router.Group("/api/bank")
+	routerGroup := router.Group("/api/bank", middleware.AuthMiddleware(), middleware.AdminMiddleware())
 	routerGroup.GET("/", controller.listHandler)
 	routerGroup.POST("/", controller.createHandler)
 	routerGroup.GET("/:id", controller.detailHandler)

@@ -1,6 +1,7 @@
 package controller
 
 import (
+	"go-transaction/delivery/middleware"
 	"go-transaction/model"
 	"go-transaction/usecase"
 	"go-transaction/utils/common"
@@ -111,9 +112,9 @@ func NewMerchantController(router *gin.Engine, usecase usecase.MerchantUsecase) 
 
 	routerGroup := router.Group("/api/merchant")
 	routerGroup.GET("/", controller.listHandler)
-	routerGroup.POST("/", controller.createHandler)
 	routerGroup.GET("/:id", controller.detailHandler)
-	routerGroup.PUT("/:id", controller.updateHandler)
+	routerGroup.POST("/", middleware.AuthMiddleware(), middleware.AdminMiddleware(), controller.createHandler)
+	routerGroup.PUT("/:id", middleware.AuthMiddleware(), middleware.AdminMiddleware(), controller.updateHandler)
 
 	return controller
 }
