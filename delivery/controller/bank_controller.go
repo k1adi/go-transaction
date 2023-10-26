@@ -110,11 +110,11 @@ func (b *BankController) updateHandler(ctx *gin.Context) {
 func NewBankController(router *gin.Engine, usecase usecase.BankUsecase) *BankController {
 	controller := &BankController{router, usecase}
 
-	routerGroup := router.Group("/api/bank", middleware.AuthMiddleware(), middleware.AdminMiddleware())
+	routerGroup := router.Group("/api/bank")
 	routerGroup.GET("/", controller.listHandler)
-	routerGroup.POST("/", controller.createHandler)
 	routerGroup.GET("/:id", controller.detailHandler)
-	routerGroup.PUT("/:id", controller.updateHandler)
+	routerGroup.POST("/", middleware.AuthMiddleware(), middleware.AdminMiddleware(), controller.createHandler)
+	routerGroup.PUT("/:id", middleware.AuthMiddleware(), middleware.AdminMiddleware(), controller.updateHandler)
 
 	return controller
 }

@@ -113,7 +113,6 @@ func NewAdminController(router *gin.Engine, usecase usecase.AdminUsecase, authUs
 	routerGroup.GET("/", controller.listHandler)
 	routerGroup.POST("/login", controller.loginHandler)
 	routerGroup.POST("/logout", controller.logoutHandler)
-	// idToken := common.IDFromToken(ctx)
 
 	return controller
 }
