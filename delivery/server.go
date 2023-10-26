@@ -30,6 +30,7 @@ func (a *appServer) initController() {
 	controller.NewMerchantController(a.engine, a.usecaseManager.MerchantUsecase())
 	controller.NewCustomerController(a.engine, a.usecaseManager.CustomerUsecase(), a.usecaseManager.AuthUsecase())
 	controller.NewAdminController(a.engine, a.usecaseManager.AdminUsecase(), a.usecaseManager.AuthUsecase())
+	controller.NewTransactionController(a.engine, a.usecaseManager.TransactionUsecase())
 }
 
 func (a *appServer) Run() {

@@ -7,6 +7,7 @@ type RepoManager interface {
 	MerchantRepository() repository.MerchantRepository
 	AdminRepository() repository.AdminRepository
 	CustomerRepository() repository.CustomerRepository
+	TransactionRepository() repository.TransactionRepository
 }
 
 type repoManager struct {
@@ -27,6 +28,10 @@ func (r *repoManager) AdminRepository() repository.AdminRepository {
 
 func (r *repoManager) CustomerRepository() repository.CustomerRepository {
 	return repository.NewCustomerRepository(r.infra.Connection())
+}
+
+func (r *repoManager) TransactionRepository() repository.TransactionRepository {
+	return repository.NewTransactionRepository(r.infra.Connection())
 }
 
 func NewRepoManager(infraParam InfraManager) RepoManager {
