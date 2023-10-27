@@ -17,8 +17,7 @@ CREATE TABLE mst_customer (
     username VARCHAR(20) UNIQUE NOT NULL,
     password VARCHAR(200) NOT NULL,
     phone_number VARCHAR(15) UNIQUE NOT NULL,
-    created_at TIMESTAMP NOT NULL,
-
+    created_at TIMESTAMP NOT NULL
 );
 
 CREATE TABLE tx_transaction (
