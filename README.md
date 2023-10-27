@@ -16,6 +16,7 @@ A transaction consists of customer data, merchant data, bank data, and the trans
 - Run `go get` to download and install the required packages or dependencies.
 - Open `config/database/init.sql` file to create a database and tables that match those used in the project.
 - Additionally, you can add the provided dummy data from the `config/database/dummy.sql` file.
+- Create a log.txt file to store every request log from the methods being used.
 - Run `go run main.go` or `go run .` to start the API.
 
 > "For the API documentation, you can import `GO - Transaction.postman_collection.json` file into the Postman application that is already installed on your computer."
