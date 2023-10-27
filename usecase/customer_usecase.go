@@ -12,6 +12,7 @@ import (
 type CustomerUsecase interface {
 	RegisterNewCustomer(bodyRequest model.Customer) error
 	ShowListCustomers() ([]model.Customer, error)
+	GetDetailCustomer(id string) (model.Customer, error)
 	FindUsernameAndPassword(username, password string) (model.Auth, error)
 }
 
@@ -50,6 +51,10 @@ func (c *customerUsecase) FindUsernameAndPassword(username, password string) (mo
 	}
 
 	return customer, nil
+}
+
+func (c *customerUsecase) GetDetailCustomer(id string) (model.Customer, error) {
+	return c.repo.Detail(id)
 }
 
 func NewCustomerUsecase(repo repository.CustomerRepository) CustomerUsecase {

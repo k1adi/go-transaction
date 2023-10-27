@@ -36,7 +36,7 @@ func (u *useCaseManager) AuthUsecase() usecase.AuthUsecase {
 }
 
 func (u *useCaseManager) TransactionUsecase() usecase.TransactionUsecase {
-	return usecase.NewTransactionUsecase(u.repoManager.TransactionRepository())
+	return usecase.NewTransactionUsecase(u.repoManager.TransactionRepository(), u.BankUsecase(), u.CustomerUsecase(), u.MerchantUsecase())
 }
 
 func NewUseCaseManager(repo RepoManager) UseCaseManager {
