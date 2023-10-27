@@ -11,10 +11,10 @@ A transaction consists of customer data, merchant data, bank data, and the trans
 ## How To Use
 
 - Clone this repository to your local computer.
-- Copy `.env.example` to `.env`.
+- Copy `.env.example` file to `.env` file.
 - Fill in each key according to your configuration.
 - Run `go get` to download and install the required packages or dependencies.
-- Open file `config/database/init.sql` to create a database and tables that match those used in the project.
+- Open `config/database/init.sql` file to create a database and tables that match those used in the project.
 - Additionally, you can add the provided dummy data from the `config/database/dummy.sql` file.
 - Run `go run main.go` or `go run .` to start the API.
 
