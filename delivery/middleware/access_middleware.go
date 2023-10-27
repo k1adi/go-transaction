@@ -33,3 +33,30 @@ func AdminMiddleware() gin.HandlerFunc {
 		ctx.Next()
 	}
 }
+
+func UserMiddleware() gin.HandlerFunc {
+	return func(ctx *gin.Context) {
+		claims, ok := ctx.Get("claims")
+		if !ok {
+			ctx.JSON(http.StatusUnauthorized, gin.H{
+				"status":  "failed",
+				"message": "invalid token",
+			})
+			ctx.Abort()
+			return
+		}
+
+		claimsMap := claims.(jwt.MapClaims)
+
+		if claimsMap["Role"] != "user" {
+			ctx.JSON(http.StatusUnauthorized, gin.H{
+				"status":  "failed",
+				"message": "access denied",
+			})
+			ctx.Abort()
+			return
+		}
+
+		ctx.Next()
+	}
+}

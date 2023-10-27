@@ -1,6 +1,7 @@
 package controller
 
 import (
+	"go-transaction/delivery/middleware"
 	"go-transaction/model"
 	"go-transaction/usecase"
 	"go-transaction/utils/common"
@@ -109,10 +110,10 @@ func NewAdminController(router *gin.Engine, usecase usecase.AdminUsecase, authUs
 	controller := &AdminController{router, usecase, authUsecase}
 
 	routerGroup := router.Group("/api/admin")
-	routerGroup.POST("/", controller.createHandler)
-	routerGroup.GET("/", controller.listHandler)
 	routerGroup.POST("/login", controller.loginHandler)
 	routerGroup.POST("/logout", controller.logoutHandler)
+	routerGroup.POST("/", middleware.AuthMiddleware(), middleware.AdminMiddleware(), controller.createHandler)
+	routerGroup.GET("/", middleware.AuthMiddleware(), middleware.AdminMiddleware(), controller.listHandler)
 
 	return controller
 }
