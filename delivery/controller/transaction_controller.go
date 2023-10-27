@@ -38,7 +38,7 @@ func (t *TransactionController) listHandler(ctx *gin.Context) {
 	})
 }
 
-func (t *TransactionController) customerHandler(ctx *gin.Context) {
+func (t *TransactionController) historyHandler(ctx *gin.Context) {
 	customerId := common.IDFromToken(ctx)
 	transactions, err := t.usecase.ShowHistoryTransactions(customerId)
 	if err != nil {
@@ -95,6 +95,6 @@ func NewTransactionController(router *gin.Engine, usecase usecase.TransactionUse
 	routerGroup := router.Group("/api/transaction")
 	routerGroup.GET("/", middleware.AuthMiddleware(), middleware.AdminMiddleware(), controller.listHandler)
 	routerGroup.POST("/", middleware.AuthMiddleware(), middleware.UserMiddleware(), controller.createHandler)
-	routerGroup.GET("/customer", middleware.AuthMiddleware(), middleware.UserMiddleware(), controller.customerHandler)
+	routerGroup.GET("/history", middleware.AuthMiddleware(), middleware.UserMiddleware(), controller.historyHandler)
 	return controller
 }

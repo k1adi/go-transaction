@@ -179,7 +179,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"admin2\",\r\n    \"password\": \"admin2\"\r\n}",
+							"raw": "{\r\n    \"username\": \"admin\",\r\n    \"password\": \"admin\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -217,7 +217,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"fullname\": \"Rizki Adi Nugroho\",\r\n    \"username\": \"kiadi\",\r\n    \"password\": \"kiadi\",\r\n    \"phone_number\": \"+628654321651\"\r\n}",
+							"raw": "{\r\n    \"fullname\": \"John Doe\",\r\n    \"username\": \"jondo\",\r\n    \"password\": \"jondo\",\r\n    \"phone_number\": \"+628654987114\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -291,7 +291,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"admin1\",\r\n    \"password\": \"admin1\"\r\n}",
+							"raw": "{\r\n    \"username\": \"admin\",\r\n    \"password\": \"admin\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -329,7 +329,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"merchant_id\" : \"b099c084-292b-4a16-801f-aa5cd21296df\",\r\n    \"bank_id\": \"8ec1b7bf-bcff-4a7b-aca4-b11d5c9bee51\",\r\n    \"amount\" : -50000\r\n}",
+							"raw": "{\r\n    \"merchant_id\" : \"b099c084-292b-4a16-801f-aa5cd21296df\",\r\n    \"bank_id\": \"8ec1b7bf-bcff-4a7b-aca4-b11d5c9bee51\",\r\n    \"amount\" : 50000\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -337,6 +337,36 @@
 							}
 						},
 						"url": "{{base-url}}/transaction"
+					},
+					"response": []
+				},
+				{
+					"name": "List All Transaction",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "{{base-url}}/transaction/"
+					},
+					"response": []
+				},
+				{
+					"name": "History Transaction By Customer",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "{{base-url}}/transaction/history"
 					},
 					"response": []
 				}
@@ -371,7 +401,7 @@
 		},
 		{
 			"key": "token",
-			"value": "",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJHMFRyNG5zYWN0MW9uIiwiZXhwIjoxNjk4MzgwMTMzLCJpYXQiOjE2OTgzNzk4MzMsIklkIjoiMDJiYjZiZjUtYTY1Yy00ZDk1LTliMDEtYzRhMzY3M2ZkMjYyIiwiVXNlcm5hbWUiOiJqb25kbyIsIlJvbGUiOiJ1c2VyIn0.2qS-Ai4YCaIUW-hbG-LzY8WYaDfAnNJBGTXqehFkhek",
 			"type": "string"
 		}
 	]
