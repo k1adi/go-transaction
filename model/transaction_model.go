@@ -15,9 +15,9 @@ type Transaction struct {
 
 type TransactionDTO struct {
 	Id            string    `json:"id"`
-	CustomerId    Customer  `json:"customer"`
-	MerchantId    Merchant  `json:"merchant"`
-	BankId        Bank      `json:"bank"`
+	Customer      Customer  `json:"customer"`
+	Merchant      Merchant  `json:"merchant"`
+	Bank          Bank      `json:"bank"`
 	Amount        uint64    `json:"amount"`
 	TransactionAt time.Time `json:"transaction_at"`
 }

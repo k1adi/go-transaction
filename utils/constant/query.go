@@ -21,7 +21,7 @@ const (
 	ADMIN_LIST       = "SELECT id,username FROM mst_admin"
 	ADMIN_VALIDATION = "SELECT id,username,password FROM mst_admin WHERE username=$1"
 
-	TRANSACTION_INSERT      = "INSERT INTO tx_transaction(id,customer_id,merchant_id,bank_id,amount,transaction_at) VALUES($1,$2,$3,$4,$5,$6)"
-	TRANSACTION_LIST        = "SELECT id,customer_id,merchant_id,bank_id,amount,transaction_at FROM tx_transaction"
-	TRANSACTION_BY_CUSTOMER = "SELECT id,customer_id,merchant_id,bank_id,amount,transaction_at FROM tx_transaction WHERE customer_id=$1"
+	TRANSACTION_INSERT  = "INSERT INTO tx_transaction(id,customer_id,merchant_id,bank_id,amount,transaction_at) VALUES($1,$2,$3,$4,$5,$6)"
+	TRANSACTION_LIST    = "SELECT id,customer_id,merchant_id,bank_id,amount,transaction_at FROM tx_transaction"
+	TRANSACTION_HISTORY = "SELECT id,customer_id,merchant_id,bank_id,amount,transaction_at FROM tx_transaction WHERE customer_id=$1"
 )

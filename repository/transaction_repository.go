@@ -9,6 +9,7 @@ import (
 type TransactionRepository interface {
 	Create(bodyRequest model.Transaction) error
 	List() ([]model.Transaction, error)
+	History(customerId string) ([]model.Transaction, error)
 	Scan(rows *sql.Rows) ([]model.Transaction, error)
 }
 
@@ -26,6 +27,19 @@ func (t *transactionRepository) Create(bodyRequest model.Transaction) error {
 
 func (t *transactionRepository) List() ([]model.Transaction, error) {
 	rows, err := t.db.Query(constant.TRANSACTION_LIST)
+	if err != nil {
+		return nil, err
+	}
+
+	transactions, err := t.Scan(rows)
+	if err != nil {
+		return nil, err
+	}
+	return transactions, nil
+}
+
+func (t *transactionRepository) History(customerId string) ([]model.Transaction, error) {
+	rows, err := t.db.Query(constant.TRANSACTION_HISTORY, customerId)
 	if err != nil {
 		return nil, err
 	}

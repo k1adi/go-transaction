@@ -16,6 +16,51 @@ type TransactionController struct {
 	usecase usecase.TransactionUsecase
 }
 
+func (t *TransactionController) listHandler(ctx *gin.Context) {
+	transactions, err := t.usecase.ShowListTransactions()
+	if err != nil {
+		ctx.AbortWithStatusJSON(http.StatusInternalServerError, map[string]any{
+			"status":  "failed",
+			"message": err.Error(),
+		})
+		return
+	}
+
+	if len(transactions) == 0 {
+		ctx.JSON(http.StatusNoContent, map[string]any{})
+		return
+	}
+
+	ctx.JSON(http.StatusOK, map[string]any{
+		"status":  "succeed",
+		"message": "success show all transactions",
+		"data":    transactions,
+	})
+}
+
+func (t *TransactionController) customerHandler(ctx *gin.Context) {
+	customerId := common.IDFromToken(ctx)
+	transactions, err := t.usecase.ShowHistoryTransactions(customerId)
+	if err != nil {
+		ctx.AbortWithStatusJSON(http.StatusInternalServerError, map[string]any{
+			"status":  "failed",
+			"message": err.Error(),
+		})
+		return
+	}
+
+	if len(transactions) == 0 {
+		ctx.JSON(http.StatusNoContent, map[string]any{})
+		return
+	}
+
+	ctx.JSON(http.StatusOK, map[string]any{
+		"status":  "succeed",
+		"message": "success show history transactions",
+		"data":    transactions,
+	})
+}
+
 func (t *TransactionController) createHandler(ctx *gin.Context) {
 	var transaction model.Transaction
 	transaction.Id = common.GenerateUUID()
@@ -48,6 +93,8 @@ func NewTransactionController(router *gin.Engine, usecase usecase.TransactionUse
 	controller := &TransactionController{router, usecase}
 
 	routerGroup := router.Group("/api/transaction")
-	routerGroup.POST("/", middleware.AuthMiddleware(), controller.createHandler)
+	routerGroup.GET("/", middleware.AuthMiddleware(), middleware.AdminMiddleware(), controller.listHandler)
+	routerGroup.POST("/", middleware.AuthMiddleware(), middleware.UserMiddleware(), controller.createHandler)
+	routerGroup.GET("/customer", middleware.AuthMiddleware(), middleware.UserMiddleware(), controller.customerHandler)
 	return controller
 }
